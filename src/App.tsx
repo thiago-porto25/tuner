@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontFamily: 'Inter-Regular',
   },
   sectionDescription: {
     marginTop: 8,
