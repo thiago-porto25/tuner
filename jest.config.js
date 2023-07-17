@@ -5,7 +5,7 @@ module.exports = {
     '@/(.*)': '<rootDir>/src/$1',
   },
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
-  testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$',
+  testRegex: '(\\.(test|spec))\\.(ts|tsx|js)$',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!<rootDir>/node_modules/'],
   coverageReporters: ['lcov', 'text'],
