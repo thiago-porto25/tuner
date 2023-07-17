@@ -10,7 +10,9 @@ import {
   View,
 } from 'react-native';
 
+import { I18n } from 'i18n-js';
 import Config from 'react-native-config';
+import { getLocales } from 'react-native-localize';
 import SplashScreen from 'react-native-splash-screen';
 import {
   Colors,
@@ -19,6 +21,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import { en, pt } from '@/shared/i18n/supportedLanguages';
+
+const i18n = new I18n(
+  { en, pt, ptBr: pt },
+  { enableFallback: true, locale: getLocales()[0].languageCode },
+);
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -85,9 +94,7 @@ function App(): JSX.Element {
           <Section title="Debug">
             <DebugInstructions />
           </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
+          <Section title="Learn More">{i18n.t('welcome')}</Section>
           <LearnMoreLinks />
         </View>
       </ScrollView>
