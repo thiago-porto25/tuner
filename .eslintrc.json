@@ -1,0 +1,47 @@
+{
+  "root": true,
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:react-native-a11y/android",
+    "@react-native"
+  ],
+  "plugins": ["import", "import-helpers"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".jsx", "tsx"] }],
+    "sort-imports": [
+      "error",
+      { "ignoreCase": true, "ignoreDeclarationSort": true }
+    ],
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/^(react|react-native)$/", // "react" module always at the first line
+          "module",
+          "/^@env$/",
+          "/^@//",
+          "parent",
+          "sibling",
+          "index",
+          "/^./styles$/" // "./styles" import always at last line
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        "tsx": "never",
+        "ts": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ]
+  }
+}
