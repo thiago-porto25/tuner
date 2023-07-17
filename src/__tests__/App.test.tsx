@@ -9,6 +9,10 @@ import App from '@/App';
 const useColorSchemeSpy = jest.spyOn(reactNative, 'useColorScheme');
 
 describe('App', () => {
+  afterAll(() => {
+    useColorSchemeSpy.mockRestore();
+  });
+
   it('renders correctly', () => {
     renderer.create(<App />);
   });
@@ -20,7 +24,7 @@ describe('App', () => {
   });
 
   it('renders correctly with testing library and dark mode', () => {
-    useColorSchemeSpy.mockReturnValueOnce('dark');
+    useColorSchemeSpy.mockReturnValue('dark');
 
     render(<App />);
 
