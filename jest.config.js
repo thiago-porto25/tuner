@@ -7,15 +7,22 @@ module.exports = {
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
   testRegex: '(\\.(test|spec))\\.(ts|tsx|js)$',
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!<rootDir>/node_modules/'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!<rootDir>/node_modules/',
+    '!src/**/*.type.ts',
+    '!src/**/*.interface.ts',
+    '!src/**/*.constants.ts',
+  ],
   coverageReporters: ['lcov', 'text'],
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
+      branches: 85,
+      functions: 85,
+      lines: 85,
       statements: -10,
     },
   },
+  setupFiles: ['./src/__tests__/utils/setupTests.ts'],
 };
