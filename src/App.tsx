@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
+  PermissionsAndroid,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -23,11 +24,13 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import { en, pt } from '@/shared/i18n/supportedLanguages';
+import requestPermissions from '@/shared/utils/requestPermissions';
 
 const i18n = new I18n(
   { en, pt, ptBr: pt },
   { enableFallback: true, locale: getLocales()[0].languageCode },
 );
+// TODO: create a helper handle i18n, pass the supported languages and get the object with the translations
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -66,8 +69,30 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  function requestMandatoryPermissions(): void {
+    const permissions = [
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+      PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+    ];
+
+    // function handlePermissionsDenied(): void {
+    //   // TODO: update a slice to show a message to the user that the permissions are required in the app
+    // }
+
+    // function handlePermissionsError(): void {
+    //   // TODO: handle error, update a slice to show a message to the user that the permissions are required in the app
+    // }
+
+    requestPermissions(permissions);
+  }
+
   useEffect(() => {
     SplashScreen.hide();
+  }, []);
+
+  useEffect(() => {
+    requestMandatoryPermissions();
   }, []);
 
   return (
