@@ -43,7 +43,17 @@
         "jsx": "never"
       }
     ],
-    "import/no-unresolved": "error"
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.[tj]s[x]",
+          "**/*.spec.[jt]s[x]",
+          "src/__tests__/**"
+        ]
+      }
+    ]
   },
   "settings": {
     "import/parsers": {
