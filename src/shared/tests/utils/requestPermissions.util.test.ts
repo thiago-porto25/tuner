@@ -1,7 +1,6 @@
-// handleRequestPermissions.test.ts
 import { PermissionsAndroid, Platform } from 'react-native';
 
-import requestPermissions from '@/shared/utils/requestPermissions';
+import requestPermissions from '@/shared/utils/requestPermissions.util';
 
 jest.mock('react-native', () => ({
   PermissionsAndroid: {
