@@ -9,7 +9,7 @@ describe('useAsyncStorage', () => {
 
   it('should get data from AsyncStorage correctly', async () => {
     const key = AsyncStorageKeys.__EXISTENT_KEY__;
-    const mockValue = 'exampleValue';
+    const mockValue = 'exampleValue1';
 
     mockedAsyncStorage.getItem.mockResolvedValueOnce(JSON.stringify(mockValue));
 
@@ -43,7 +43,7 @@ describe('useAsyncStorage', () => {
 
   it('should store data in AsyncStorage correctly', async () => {
     const key = AsyncStorageKeys.__EXAMPLE_KEY__;
-    const value = 'exampleValue';
+    const value = 'exampleValue2';
 
     await storeData(key, value);
 
@@ -55,7 +55,7 @@ describe('useAsyncStorage', () => {
 
   it('should handle errors when storing data in AsyncStorage', async () => {
     const key = AsyncStorageKeys.__EXAMPLE_KEY__;
-    const value = 'exampleValue';
+    const value = 'exampleValue3';
 
     mockedAsyncStorage.setItem.mockRejectedValueOnce(new Error('Some error'));
 

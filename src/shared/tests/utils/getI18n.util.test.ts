@@ -29,6 +29,8 @@ jest.mock('i18n-js', () => ({
 
 describe('getI18n', () => {
   const mockedI18n = I18n as jest.MockedClass<typeof I18n>;
+  const en = { message1: 'Hello', message2: 'World' };
+  const pt = { message1: 'Olá', message2: 'Mundo' };
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -39,9 +41,6 @@ describe('getI18n', () => {
   });
 
   it('should create an instance of I18n with the correct config', () => {
-    const en = { message1: 'Hello', message2: 'World' };
-    const pt = { message1: 'Olá', message2: 'Mundo' };
-
     getI18n({ en, pt });
 
     expect(mockedI18n).toHaveBeenCalledTimes(1);
@@ -53,9 +52,6 @@ describe('getI18n', () => {
 
   it('should use the language code from the first locale', () => {
     getLocalesSpy.mockReturnValueOnce([ptLocale, enLocale]);
-
-    const en = { message1: 'Hello', message2: 'World' };
-    const pt = { message1: 'Olá', message2: 'Mundo' };
 
     getI18n({ en, pt });
 
