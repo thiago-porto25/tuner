@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import React, { PermissionsAndroid, View } from 'react-native';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { styled } from 'styled-components/native';
 
 import { resetPreferencesStateAction } from '@/features/preferences/store/preferences.slice';
 import { resetTunerStateAction } from '@/features/tuner/store/tuner.slice';
@@ -11,6 +12,12 @@ import useAppDispatch from '@/shared/hooks/useAppDispatch';
 import requestPermissions from '@/shared/utils/requestPermissions.util';
 
 const Tab = createMaterialBottomTabNavigator();
+
+const StyledView = styled.View`
+  background-color: ${({ theme }) => theme.colors.primary};
+  height: 20px;
+  width: 20px;
+`;
 
 function TestTuner() {
   const dispatch = useAppDispatch();
@@ -41,8 +48,9 @@ function TestTuner() {
   return (
     <View
       testID={testID.TUNER_SCREEN}
-      style={{ flex: 1, backgroundColor: 'red' }}
-    />
+      style={{ flex: 1, backgroundColor: 'red' }}>
+      <StyledView />
+    </View>
   );
 }
 

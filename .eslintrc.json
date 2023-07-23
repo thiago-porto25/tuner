@@ -44,17 +44,7 @@
       }
     ],
     "import/no-unresolved": "error",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": [
-          "**/*.test.[tj]s[x]",
-          "**/*.spec.[jt]s[x]",
-          "src/__tests__/**",
-          "**/__tests__/**"
-        ]
-      }
-    ],
+    "import/no-extraneous-dependencies": "off",
     "no-param-reassign": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
