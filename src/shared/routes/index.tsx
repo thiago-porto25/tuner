@@ -3,12 +3,18 @@ import React, { PermissionsAndroid, View } from 'react-native';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
+import { resetPreferencesStateAction } from '@/features/preferences/store/preferences.slice';
+import { resetTunerStateAction } from '@/features/tuner/store/tuner.slice';
 import routeNames from '@/shared/constants/routeNames.constants';
+import testID from '@/shared/constants/testIDs.constants';
+import useAppDispatch from '@/shared/hooks/useAppDispatch';
 import requestPermissions from '@/shared/utils/requestPermissions.util';
 
 const Tab = createMaterialBottomTabNavigator();
 
 function TestTuner() {
+  const dispatch = useAppDispatch();
+
   function requestMandatoryPermissions(): void {
     const permissions = [
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
@@ -29,20 +35,27 @@ function TestTuner() {
 
   useEffect(() => {
     requestMandatoryPermissions();
-  }, []);
+    dispatch(resetTunerStateAction());
+  }, [dispatch]);
 
   return (
     <View
-      testID={routeNames.TUNER}
+      testID={testID.TUNER_SCREEN}
       style={{ flex: 1, backgroundColor: 'red' }}
     />
   );
 }
 
 function TestSettings() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(resetPreferencesStateAction());
+  }, [dispatch]);
+
   return (
     <View
-      testID={routeNames.PREFERENCES}
+      testID={testID.PREFERENCES_SCREEN}
       style={{ flex: 1, backgroundColor: 'black' }}
     />
   );
@@ -51,8 +64,16 @@ function TestSettings() {
 export default function Routes() {
   return (
     <Tab.Navigator initialRouteName={routeNames.TUNER}>
-      <Tab.Screen name={routeNames.TUNER} component={TestTuner} />
-      <Tab.Screen name={routeNames.PREFERENCES} component={TestSettings} />
+      <Tab.Screen
+        name={routeNames.TUNER}
+        component={TestTuner}
+        options={{ tabBarTestID: testID.TUNER_TAB_BUTTON }}
+      />
+      <Tab.Screen
+        name={routeNames.PREFERENCES}
+        component={TestSettings}
+        options={{ tabBarTestID: testID.PREFERENCES_TAB_BUTTON }}
+      />
     </Tab.Navigator>
   );
 }
