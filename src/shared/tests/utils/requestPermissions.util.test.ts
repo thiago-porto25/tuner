@@ -19,14 +19,13 @@ describe('requestPermissions', () => {
   const mockedPermissionsAndroid = PermissionsAndroid as jest.Mocked<
     typeof PermissionsAndroid
   >;
+  const permissions = ['permission1', 'permission2'];
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should request permissions when all permissions are granted', async () => {
-    const permissions = ['permission1', 'permission2'];
-
     mockedPermissionsAndroid.requestMultiple.mockResolvedValueOnce({
       permission1: PermissionsAndroid.RESULTS.GRANTED,
       permission2: PermissionsAndroid.RESULTS.GRANTED,
@@ -40,7 +39,6 @@ describe('requestPermissions', () => {
   });
 
   it('should request permissions and call successCallback when all permissions are granted', async () => {
-    const permissions = ['permission1', 'permission2'];
     const successCallback = jest.fn();
 
     mockedPermissionsAndroid.requestMultiple.mockResolvedValueOnce({
@@ -57,8 +55,6 @@ describe('requestPermissions', () => {
   });
 
   it('should request permissions when at least one permission is denied', async () => {
-    const permissions = ['permission1', 'permission2'];
-
     mockedPermissionsAndroid.requestMultiple.mockResolvedValueOnce({
       permission1: PermissionsAndroid.RESULTS.DENIED,
       permission2: PermissionsAndroid.RESULTS.GRANTED,
@@ -72,7 +68,6 @@ describe('requestPermissions', () => {
   });
 
   it('should request permissions and call deniedCallback when at least one permission is denied', async () => {
-    const permissions = ['permission1', 'permission2'];
     const deniedCallback = jest.fn();
 
     mockedPermissionsAndroid.requestMultiple.mockResolvedValueOnce({
@@ -89,8 +84,6 @@ describe('requestPermissions', () => {
   });
 
   it('should handle errors when an error occurs', async () => {
-    const permissions = ['permission1', 'permission2'];
-
     mockedPermissionsAndroid.requestMultiple.mockRejectedValueOnce(
       new Error('Some error'),
     );
@@ -103,7 +96,6 @@ describe('requestPermissions', () => {
   });
 
   it('should handle errors and call errorCallback when an error occurs', async () => {
-    const permissions = ['permission1', 'permission2'];
     const errorCallback = jest.fn();
 
     mockedPermissionsAndroid.requestMultiple.mockRejectedValueOnce(
@@ -120,7 +112,6 @@ describe('requestPermissions', () => {
 
   it('should do nothing if Platform OS is not android', async () => {
     Platform.OS = 'ios';
-    const permissions = ['permission1', 'permission2'];
 
     await requestPermissions(permissions);
 
