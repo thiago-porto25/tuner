@@ -38,3 +38,16 @@ global.timeTravel = (time = frameTime) => {
     tickTravel();
   }
 };
+
+jest.mock(
+  'react-native//Libraries/PermissionsAndroid/PermissionsAndroid',
+  () => {
+    return {
+      ...jest.requireActual(
+        'react-native//Libraries/PermissionsAndroid/PermissionsAndroid',
+      ),
+      requestMultiple: jest.fn(),
+      check: jest.fn(),
+    };
+  },
+);

@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { render, RenderOptions } from '@testing-library/react-native';
+import { PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 
@@ -11,9 +12,11 @@ import theme from '@/shared/theme';
 function AllTheProviders({ children }: PropsWithChildren) {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <NavigationContainer>{children}</NavigationContainer>
-      </ThemeProvider>
+      <PaperProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <NavigationContainer>{children}</NavigationContainer>
+        </ThemeProvider>
+      </PaperProvider>
     </Provider>
   );
 }
