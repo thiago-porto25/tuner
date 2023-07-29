@@ -3,4 +3,5 @@ export default {
   PREFERENCES_SCREEN: 'Preferences',
   TUNER_TAB_BUTTON: 'Tuner-TabButton',
   PREFERENCES_TAB_BUTTON: 'Preferences-TabButton',
+  ACTION_MODAL_CLOSE_BUTTON: 'ActionModal-CloseButton',
 };
