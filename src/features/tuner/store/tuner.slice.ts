@@ -4,7 +4,6 @@ import type { TunerState } from '@/features/tuner/types/tunerState.interface';
 
 const initialState: TunerState = {
   status: 'idle',
-  error: null,
 };
 
 export const tunerSlice = createSlice({
