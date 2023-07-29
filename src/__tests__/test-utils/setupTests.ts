@@ -51,3 +51,4 @@ jest.mock(
     };
   },
 );
+jest.mock('react-native//Libraries/EventEmitter/NativeEventEmitter');
