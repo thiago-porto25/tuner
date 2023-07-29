@@ -9,6 +9,7 @@
   "plugins": ["import", "import-helpers"],
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", "tsx"] }],
+    "react/jsx-props-no-spreading": "off",
     "sort-imports": [
       "error",
       { "ignoreCase": true, "ignoreDeclarationSort": true }
