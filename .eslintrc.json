@@ -10,6 +10,7 @@
   "rules": {
     "react/jsx-filename-extension": [1, { "extensions": [".jsx", "tsx"] }],
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-sort-props": "warn",
     "sort-imports": [
       "error",
       { "ignoreCase": true, "ignoreDeclarationSort": true }

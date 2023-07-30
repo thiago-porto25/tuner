@@ -17,13 +17,13 @@ function App(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <PaperProvider theme={theme}>
           <NavigationContainer>
             <Routes />
           </NavigationContainer>
-        </ThemeProvider>
-      </PaperProvider>
+        </PaperProvider>
+      </ThemeProvider>
     </Provider>
   );
 }

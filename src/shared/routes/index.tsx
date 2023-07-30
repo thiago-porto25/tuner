@@ -25,13 +25,13 @@ export default function Routes() {
   return (
     <Tab.Navigator initialRouteName={routeNames.TUNER}>
       <Tab.Screen
-        name={routeNames.TUNER}
         component={Tuner}
+        name={routeNames.TUNER}
         options={{ tabBarTestID: testID.TUNER_TAB_BUTTON }}
       />
       <Tab.Screen
-        name={routeNames.PREFERENCES}
         component={TestSettings}
+        name={routeNames.PREFERENCES}
         options={{ tabBarTestID: testID.PREFERENCES_TAB_BUTTON }}
       />
     </Tab.Navigator>

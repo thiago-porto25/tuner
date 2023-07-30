@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { EmitterSubscription, PermissionsAndroid } from 'react-native';
 
 import PitchFinder from 'pitchfinder';
@@ -73,6 +73,14 @@ function Tuner() {
     subscriptionRef.current = listener;
   }
 
+  const closeDeniedModal = useCallback(() => {
+    setIsPermissionDeniedModalVisible(false);
+  }, []);
+
+  const closeErrorModal = useCallback(() => {
+    setIsPermissionErrorModalVisible(false);
+  }, []);
+
   function handlePermissionsSuccess(): void {
     setIsPermissionDeniedModalVisible(false);
     setIsPermissionErrorModalVisible(false);
@@ -118,26 +126,56 @@ function Tuner() {
   return (
     <S.MainContainer testID={testID.TUNER_SCREEN}>
       <S.HeaderContainer>
-        <Text>{i18n.t('header')}</Text>
+        <Text>{i18n.t('tunerScreen.header')}</Text>
 
         {/* INDICATOR */}
       </S.HeaderContainer>
 
       <ActionModal
-        visible={isPermissionDeniedModalVisible}
-        dismissable={false}
+        buttons={[
+          {
+            mode: 'outlined',
+            children: i18n.t('tunerScreen.permissions.denied.leaveButtonLabel'),
+            key: 1,
+          },
+          {
+            mode: 'contained',
+            children: i18n.t('tunerScreen.permissions.denied.retryButtonLabel'),
+            key: 2,
+          },
+        ]}
+        closeModal={closeDeniedModal}
+        description={i18n.t('tunerScreen.permissions.denied.description')}
+        dismissable={true}
         dismissableBackButton={false}
-        overlayAccessibilityLabel="Modal backdrop. Does not close it.">
-        <Text>{i18n.t('permissionDenied')}</Text>
-      </ActionModal>
+        overlayAccessibilityLabel={i18n.t(
+          'tunerScreen.permissions.denied.overlayLabel',
+        )}
+        showClose
+        testID={testID.TUNER_DENIED_PERMISSION_MODAL}
+        title={i18n.t('tunerScreen.permissions.denied.title')}
+        visible={isPermissionDeniedModalVisible}
+      />
 
       <ActionModal
-        visible={isPermissionErrorModalVisible}
+        buttons={[
+          {
+            mode: 'contained',
+            children: i18n.t('tunerScreen.permissions.error.retryButtonLabel'),
+            key: 1,
+          },
+        ]}
+        closeModal={closeErrorModal}
+        description={i18n.t('tunerScreen.permissions.error.description')}
         dismissable={false}
         dismissableBackButton={false}
-        overlayAccessibilityLabel="Modal backdrop. Does not close it.">
-        <Text>{i18n.t('permissionError')}</Text>
-      </ActionModal>
+        overlayAccessibilityLabel={i18n.t(
+          'tunerScreen.permissions.error.overlayLabel',
+        )}
+        testID={testID.TUNER_ERROR_PERMISSION_MODAL}
+        title={i18n.t('tunerScreen.permissions.error.title')}
+        visible={isPermissionErrorModalVisible}
+      />
     </S.MainContainer>
   );
 }

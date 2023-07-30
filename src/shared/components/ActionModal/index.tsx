@@ -10,7 +10,12 @@ import * as S from './styles';
 export default function ActionModal({
   children,
   visible,
-  contentContainerStyle,
+  contentContainerStyle = {
+    bottom: 0,
+    left: 0,
+    right: 0,
+    position: 'absolute',
+  },
   dismissable,
   dismissableBackButton,
   onDismiss,
@@ -33,17 +38,16 @@ export default function ActionModal({
   }
 
   function getButtons(btns: Required<ActionModalProps>['buttons']) {
-    return btns.map((button, index) => (
-      <S.ButtonContainer key={button.key} isLast={index === btns.length - 1}>
-        <Button {...button}>{button.children}</Button>
-      </S.ButtonContainer>
+    return btns.map(button => (
+      <Button key={button.key} {...button}>
+        {button.children}
+      </Button>
     ));
   }
 
   return (
     <Portal>
       <Modal
-        visible={visible}
         contentContainerStyle={contentContainerStyle}
         dismissable={dismissable}
         dismissableBackButton={dismissableBackButton}
@@ -51,7 +55,8 @@ export default function ActionModal({
         overlayAccessibilityLabel={overlayAccessibilityLabel}
         style={style}
         testID={testID}
-        theme={theme}>
+        theme={theme}
+        visible={visible}>
         {children || (
           <S.ActionModalContainer>
             {showClose && closeModal && (

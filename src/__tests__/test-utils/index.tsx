@@ -12,11 +12,11 @@ import theme from '@/shared/theme';
 function AllTheProviders({ children }: PropsWithChildren) {
   return (
     <Provider store={store}>
-      <PaperProvider theme={theme}>
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <PaperProvider theme={theme}>
           <NavigationContainer>{children}</NavigationContainer>
-        </ThemeProvider>
-      </PaperProvider>
+        </PaperProvider>
+      </ThemeProvider>
     </Provider>
   );
 }

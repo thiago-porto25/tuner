@@ -3,6 +3,13 @@ import { MD3Type } from 'react-native-paper/lib/typescript/src/types';
 
 type Mode = 'adaptive' | 'exact';
 
+const family = {
+  regular: 'Inter-Regular',
+  medium: 'Inter-Medium',
+  bold: 'Inter-Bold',
+  semibold: 'Inter-SemiBold',
+};
+
 export default {
   ...DefaultTheme,
   mode: 'adaptive' as Mode,
@@ -15,72 +22,72 @@ export default {
   fonts: {
     displaySmall: {
       ...DefaultTheme.fonts.displaySmall,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     displayMedium: {
       ...DefaultTheme.fonts.displayMedium,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     displayLarge: {
       ...DefaultTheme.fonts.displayLarge,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     headlineSmall: {
       ...DefaultTheme.fonts.headlineSmall,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     headlineMedium: {
       ...DefaultTheme.fonts.headlineMedium,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     headlineLarge: {
       ...DefaultTheme.fonts.headlineLarge,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     titleSmall: {
       ...DefaultTheme.fonts.titleSmall,
-      fontFamily: 'Inter-Medium',
+      fontFamily: family.medium,
       fontWeight: '400',
     } as MD3Type,
     titleMedium: {
       ...DefaultTheme.fonts.titleMedium,
-      fontFamily: 'Inter-Medium',
+      fontFamily: family.medium,
       fontWeight: '400',
     } as MD3Type,
     titleLarge: {
       ...DefaultTheme.fonts.titleLarge,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     labelSmall: {
       ...DefaultTheme.fonts.labelSmall,
-      fontFamily: 'Inter-Medium',
+      fontFamily: family.medium,
       fontWeight: '400',
     } as MD3Type,
     labelMedium: {
       ...DefaultTheme.fonts.labelMedium,
-      fontFamily: 'Inter-Medium',
+      fontFamily: family.medium,
       fontWeight: '400',
     } as MD3Type,
     labelLarge: {
       ...DefaultTheme.fonts.labelLarge,
-      fontFamily: 'Inter-Medium',
+      fontFamily: family.medium,
       fontWeight: '400',
     } as MD3Type,
     bodySmall: {
       ...DefaultTheme.fonts.bodySmall,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     bodyMedium: {
       ...DefaultTheme.fonts.bodyMedium,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     bodyLarge: {
       ...DefaultTheme.fonts.bodyLarge,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
     default: {
       ...DefaultTheme.fonts.default,
-      fontFamily: 'Inter-Regular',
+      fontFamily: family.regular,
     },
   },
   space: {
@@ -113,4 +120,5 @@ export default {
     sizeHuge: 160,
     sizeGiant: 200,
   },
+  family,
 };
