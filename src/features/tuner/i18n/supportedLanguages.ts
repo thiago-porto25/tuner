@@ -2,40 +2,52 @@ const en = {
   tunerScreen: {
     header: 'Tuner Pro',
     permissions: {
-      denied: {
-        overlayLabel: '',
-        title: 'This is the Title',
+      neverAsk: {
         description:
-          'Oops... We have encountered an error managing your permissions. Please try again.',
-        leaveButtonLabel: 'Close',
+          "To use this app, please grant microphone permission. It enables audio recording, which unlocks the app's full experience. Go to your device settings and grant permission for the app.",
+        retryButtonLabel: 'Open settings',
+      },
+      denied: {
+        overlayLabel: 'Clicking here does not close the modal.',
+        title: 'Microphone permission required',
+        description:
+          "To use this app, please grant microphone permission. It enables audio recording, which unlocks the app's full experience.",
+        leaveButtonLabel: 'Leave app',
         retryButtonLabel: 'Try again',
       },
       error: {
-        overlayLabel: '',
-        title: '',
-        description: '',
-        retryButtonLabel: '',
+        overlayLabel: 'Clicking here does not close the modal.',
+        title: 'Permission request error',
+        description:
+          'An error occurred while requesting permissions. Please try again to make sure the necessary permissions are granted for the app to function properly.',
+        retryButtonLabel: 'Try again',
       },
     },
   },
 };
 const pt = {
   tunerScreen: {
-    header: 'Tuner Pro',
+    header: 'Afinador Pro',
     permissions: {
-      denied: {
-        overlayLabel: '',
-        title: '',
+      neverAsk: {
         description:
-          'Oops... Encontramos um erro ao gerenciar suas permissões. Por favor, tente novamente.',
-        leaveButtonLabel: '',
-        retryButtonLabel: '',
+          'Para usar este aplicativo, por favor, conceda permissão de acesso ao microfone. Isso possibilita a gravação de áudio, o que desbloqueia a experiência completa do aplicativo. Vá para as configurações do seu dispositivo e conceda permissão para o aplicativo.',
+        retryButtonLabel: 'Abrir configurações',
+      },
+      denied: {
+        overlayLabel: 'Clicar aqui não fecha o modal.',
+        title: 'Permissão de microfone necessária',
+        description:
+          'Para usar este aplicativo, por favor, conceda permissão de acesso ao microfone. Isso possibilita a gravação de áudio, o que desbloqueia a experiência completa do aplicativo.',
+        leaveButtonLabel: 'Sair do aplicativo',
+        retryButtonLabel: 'Tentar novamente',
       },
       error: {
-        overlayLabel: '',
-        title: '',
-        description: '',
-        retryButtonLabel: '',
+        overlayLabel: 'Clicar aqui não fecha o modal.',
+        title: 'Erro ao solicitar permissão',
+        description:
+          'Um erro ocorreu ao solicitar permissões. Por favor, tente novamente para garantir que as permissões necessárias sejam concedidas para o aplicativo funcionar corretamente.',
+        retryButtonLabel: 'Tentar novamente',
       },
     },
   },

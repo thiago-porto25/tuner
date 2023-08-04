@@ -5,5 +5,5 @@ export default async function checkMultiplePermissions(
 ): Promise<boolean> {
   return (
     await Promise.all(permissions.map(p => PermissionsAndroid.check(p)))
-  ).every(granted => granted === true);
+  ).every(granted => granted);
 }

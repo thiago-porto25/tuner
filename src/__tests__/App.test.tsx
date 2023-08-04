@@ -1,11 +1,11 @@
 import React from 'react';
-import reactNative from 'react-native';
+import RN from 'react-native';
 
-import { render } from '@testing-library/react-native';
+import { act, render } from '@testing-library/react-native';
 
 import App from '@/App';
 
-const useColorSchemeSpy = jest.spyOn(reactNative, 'useColorScheme');
+const useColorSchemeSpy = jest.spyOn(RN, 'useColorScheme');
 
 describe('App', () => {
   beforeAll(() => {
@@ -16,13 +16,21 @@ describe('App', () => {
     useColorSchemeSpy.mockRestore();
   });
 
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     render(<App />);
+
+    await act(async () => {
+      global.timeTravel(500);
+    });
   });
 
-  it('renders correctly and dark mode', () => {
+  it('renders correctly and dark mode', async () => {
     useColorSchemeSpy.mockReturnValue('dark');
 
     render(<App />);
+
+    await act(async () => {
+      global.timeTravel(500);
+    });
   });
 });

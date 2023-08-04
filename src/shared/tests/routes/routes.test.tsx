@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { render, screen } from '@/__tests__/test-utils';
-import testID from '@/shared/constants/testIDs.constants';
+import testIDTuner from '@/features/tuner/constants/testIDs.constants';
 import Routes from '@/shared/routes';
 
 describe('Routes', () => {
@@ -9,9 +9,9 @@ describe('Routes', () => {
     jest.useFakeTimers();
   });
 
-  it('should render default route without errors', () => {
+  it('should render default route without errors', async () => {
     render(<Routes />);
 
-    expect(screen.getByTestId(testID.TUNER_SCREEN)).toBeTruthy();
+    expect(await screen.findByTestId(testIDTuner.TUNER_SCREEN)).toBeTruthy();
   });
 });

@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import { resetPreferencesStateAction } from '@/features/preferences/store/preferences.slice';
+import testIDTuner from '@/features/tuner/constants/testIDs.constants';
 import Tuner from '@/features/tuner/screens/Tuner';
 import routeNames from '@/shared/constants/routeNames.constants';
 import testID from '@/shared/constants/testIDs.constants';
@@ -27,7 +28,7 @@ export default function Routes() {
       <Tab.Screen
         component={Tuner}
         name={routeNames.TUNER}
-        options={{ tabBarTestID: testID.TUNER_TAB_BUTTON }}
+        options={{ tabBarTestID: testIDTuner.TUNER_TAB_BUTTON }}
       />
       <Tab.Screen
         component={TestSettings}

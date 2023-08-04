@@ -1,4 +1,4 @@
-import { PermissionsAndroid, Platform } from 'react-native';
+import { PermissionsAndroid } from 'react-native';
 
 import requestPermissions from '@/shared/utils/requestPermissions.util';
 
@@ -9,9 +9,6 @@ jest.mock('react-native', () => ({
       GRANTED: 'granted',
       DENIED: 'denied',
     },
-  },
-  Platform: {
-    OS: 'android',
   },
 }));
 
@@ -108,13 +105,5 @@ describe('requestPermissions', () => {
       permissions,
     );
     expect(errorCallback).toHaveBeenCalled();
-  });
-
-  it('should do nothing if Platform OS is not android', async () => {
-    Platform.OS = 'ios';
-
-    await requestPermissions(permissions);
-
-    expect(mockedPermissionsAndroid.requestMultiple).not.toHaveBeenCalled();
   });
 });

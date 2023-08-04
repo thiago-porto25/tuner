@@ -30,6 +30,6 @@ module.exports = {
     },
   },
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-navigation|react-native-vector-icons|react-native-recording|@react-native(-community)?)/)',
+    'node_modules/(?!((jest-)?react-native|@react-navigation|react-native-vector-icons|react-native-exit-app|react-native-recording|@react-native(-community)?)/)',
   ],
 };

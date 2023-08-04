@@ -8,5 +8,10 @@
       "@/*": ["*"]
     }
   },
-  "include": ["src", "./styled.d.ts", "react-native-recording.d.ts"]
+  "include": [
+    "src",
+    "./styled.d.ts",
+    "react-native-recording.d.ts",
+    "global.d.ts"
+  ]
 }
