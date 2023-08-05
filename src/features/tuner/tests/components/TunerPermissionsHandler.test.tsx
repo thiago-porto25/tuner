@@ -6,7 +6,6 @@ import {
   PermissionStatus,
 } from 'react-native';
 
-import MockDate from 'mockdate';
 import RNExitApp from 'react-native-exit-app';
 
 import { act, fireEvent, render, screen } from '@/__tests__/test-utils';
@@ -46,8 +45,7 @@ describe('TunerPermissionsHandler', () => {
   const mockedLinking = Linking as jest.Mocked<typeof Linking>;
 
   beforeAll(() => {
-    jest.useFakeTimers({ legacyFakeTimers: true });
-    MockDate.set(0);
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
