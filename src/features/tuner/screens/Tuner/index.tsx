@@ -4,6 +4,8 @@ import { EmitterSubscription } from 'react-native';
 import PitchFinder from 'pitchfinder';
 import { Text } from 'react-native-paper';
 
+import Meter from '@/features/tuner/components/Meter';
+import TunerPermissionsHandler from '@/features/tuner/components/TunerPermissionsHandler';
 import {
   noteStrings,
   standardMiddleA,
@@ -18,8 +20,6 @@ import {
 } from '@/features/tuner/utils/recorder.util';
 import getI18n from '@/shared/utils/getI18n.util';
 
-import TunerPermissionsHandler from '../../components/TunerPermissionsHandler';
-
 import * as S from './styles';
 
 const i18n = getI18n({ en, pt });
@@ -31,7 +31,7 @@ const initialTunerData: TunerData = {
 };
 
 function Tuner() {
-  const [, setTunerData] = useState<TunerData>(initialTunerData);
+  const [tunerData, setTunerData] = useState<TunerData>(initialTunerData);
   const [arePermissionsGranted, setArePermissionsGranted] = useState(false);
 
   const subscriptionRef = useRef<EmitterSubscription>();
@@ -71,7 +71,12 @@ function Tuner() {
       <S.HeaderContainer>
         <Text>{i18n.t('tunerScreen.header')}</Text>
 
-        {/* INDICATOR */}
+        <Meter
+          cents={tunerData.cents}
+          frequency={tunerData.frequency}
+          noteName={tunerData.noteName}
+          octave={tunerData.octave}
+        />
       </S.HeaderContainer>
 
       <TunerPermissionsHandler
