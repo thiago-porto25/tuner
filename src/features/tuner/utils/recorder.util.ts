@@ -6,8 +6,8 @@ export function startRecording(
   listenerCallback: (data: Float32Array) => void,
 ): EmitterSubscription {
   Recording.init({
-    bufferSize: 2048,
-    sampleRate: 22050,
+    bufferSize: 4096,
+    sampleRate: 44100,
     bitsPerChannel: 16,
     channelsPerFrame: 1,
   });

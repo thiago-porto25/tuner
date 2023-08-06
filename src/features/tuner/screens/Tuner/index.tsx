@@ -1,70 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { EmitterSubscription } from 'react-native';
+import React from 'react';
 
-import PitchFinder from 'pitchfinder';
 import { Text } from 'react-native-paper';
 
 import Meter from '@/features/tuner/components/Meter';
 import TunerPermissionsHandler from '@/features/tuner/components/TunerPermissionsHandler';
-import {
-  noteStrings,
-  standardMiddleA,
-} from '@/features/tuner/constants/notes.constants';
 import testID from '@/features/tuner/constants/testIDs.constants';
+import useNoteDetector from '@/features/tuner/hooks/useNoteDetector';
 import { en, pt } from '@/features/tuner/i18n/supportedLanguages';
-import { TunerData } from '@/features/tuner/types/tunerData.interface';
-import NoteFinder from '@/features/tuner/utils/noteFinder.util';
-import {
-  startRecording,
-  stopRecording,
-} from '@/features/tuner/utils/recorder.util';
 import getI18n from '@/shared/utils/getI18n.util';
 
 import * as S from './styles';
 
 const i18n = getI18n({ en, pt });
-const initialTunerData: TunerData = {
-  cents: 0,
-  frequency: standardMiddleA,
-  noteName: noteStrings[9],
-  octave: 4,
-};
 
 function Tuner() {
-  const [tunerData, setTunerData] = useState<TunerData>(initialTunerData);
-  const [arePermissionsGranted, setArePermissionsGranted] = useState(false);
-
-  const subscriptionRef = useRef<EmitterSubscription>();
-
-  function initNoteDetection() {
-    const noteFinder = new NoteFinder();
-    const detectPitch = PitchFinder.YIN({ sampleRate: 22050 });
-
-    const listener = startRecording(data => {
-      const frequency = detectPitch(data);
-
-      if (frequency) {
-        const noteValue = noteFinder.getNoteValue(frequency);
-
-        setTunerData({
-          frequency,
-          cents: noteFinder.getCents(frequency, noteValue),
-          noteName: NoteFinder.getNoteName(noteValue),
-          octave: NoteFinder.getOctave(noteValue),
-        });
-      }
-    });
-
-    subscriptionRef.current = listener;
-  }
-
-  useEffect(() => {
-    if (arePermissionsGranted) initNoteDetection();
-
-    return () => {
-      if (arePermissionsGranted) stopRecording(subscriptionRef.current);
-    };
-  }, [arePermissionsGranted]);
+  const { noteData } = useNoteDetector();
 
   return (
     <S.MainContainer testID={testID.TUNER_SCREEN}>
@@ -72,16 +22,14 @@ function Tuner() {
         <Text>{i18n.t('tunerScreen.header')}</Text>
 
         <Meter
-          cents={tunerData.cents}
-          frequency={tunerData.frequency}
-          noteName={tunerData.noteName}
-          octave={tunerData.octave}
+          cents={noteData.cents}
+          frequency={noteData.frequency}
+          noteName={noteData.noteName}
+          octave={noteData.octave}
         />
       </S.HeaderContainer>
 
-      <TunerPermissionsHandler
-        setArePermissionsGranted={setArePermissionsGranted}
-      />
+      <TunerPermissionsHandler />
     </S.MainContainer>
   );
 }

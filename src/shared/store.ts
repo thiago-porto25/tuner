@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import preferencesSliceReducer from '@/features/preferences/store/preferences.slice';
+import tunerSliceReducer from '@/features/tuner/store/tuner.slice';
 
 export const store = configureStore({
   reducer: {
     preferences: preferencesSliceReducer,
+    tuner: tunerSliceReducer,
   },
 });
 

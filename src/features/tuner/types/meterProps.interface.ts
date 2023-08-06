@@ -1,3 +1,3 @@
-import { TunerData } from './tunerData.interface';
+import { NoteData } from './noteData.interface';
 
-export interface MeterProps extends TunerData {}
+export interface MeterProps extends NoteData {}

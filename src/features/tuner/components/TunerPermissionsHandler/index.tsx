@@ -6,8 +6,9 @@ import { ButtonProps } from 'react-native-paper';
 
 import testID from '@/features/tuner/constants/testIDs.constants';
 import { en, pt } from '@/features/tuner/i18n/supportedLanguages';
-import { TunerPermissionsHandlerProps } from '@/features/tuner/types/tunerPermissionsHandlerProps.interface';
+import { setPermissionsAction } from '@/features/tuner/store/tuner.slice';
 import ActionModal from '@/shared/components/ActionModal';
+import useAppDispatch from '@/shared/hooks/useAppDispatch';
 import checkMultiplePermissions from '@/shared/utils/checkMultiplePermissions.util';
 import getI18n from '@/shared/utils/getI18n.util';
 import requestPermissions from '@/shared/utils/requestPermissions.util';
@@ -15,15 +16,15 @@ import requestPermissions from '@/shared/utils/requestPermissions.util';
 const i18n = getI18n({ en, pt });
 const permissions = [PermissionsAndroid.PERMISSIONS.RECORD_AUDIO];
 
-function TunerPermissionsHandler({
-  setArePermissionsGranted,
-}: TunerPermissionsHandlerProps) {
+function TunerPermissionsHandler() {
   const [isPermissionErrorModalVisible, setIsPermissionErrorModalVisible] =
     useState(false);
   const [isPermissionDeniedModalVisible, setIsPermissionDeniedModalVisible] =
     useState(false);
   const [arePermissionsNeverAskAgain, setArePermissionsNeverAskAgain] =
     useState(false);
+
+  const dispatch = useAppDispatch();
 
   function handlePermissionsDenied(): void {
     setIsPermissionErrorModalVisible(false);
@@ -49,8 +50,8 @@ function TunerPermissionsHandler({
     setIsPermissionDeniedModalVisible(false);
     setIsPermissionErrorModalVisible(false);
     setArePermissionsNeverAskAgain(false);
-    setArePermissionsGranted(true);
-  }, [setArePermissionsGranted]);
+    dispatch(setPermissionsAction(true));
+  }, [dispatch]);
 
   const requestMandatoryPermissions = useCallback(async () => {
     await requestPermissions(
