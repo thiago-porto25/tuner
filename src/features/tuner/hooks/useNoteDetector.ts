@@ -1,9 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { EmitterSubscription } from 'react-native';
 
-import PitchFinder from 'pitchfinder';
+import { PitchDetector } from 'pitchy';
 
-import { standardMiddleA } from '@/features/tuner/constants/notes.constants';
+import {
+  bufferSize,
+  maxFrequency,
+  minFrequency,
+  sampleRate,
+  standardMiddleA,
+} from '@/features/tuner/constants/notes.constants';
 import { selectArePermissionsGranted } from '@/features/tuner/store/selectors';
 import { NoteData } from '@/features/tuner/types/noteData.interface';
 import NoteFinder from '@/features/tuner/utils/noteFinder.util';
@@ -29,12 +35,20 @@ export default function useNoteDetector(middleA: number = standardMiddleA) {
 
   const initNoteDetection = useCallback(() => {
     const noteFinder = new NoteFinder(middleA);
-    const detectPitch = PitchFinder.YIN({ sampleRate: 44100 });
+    const pitchy = PitchDetector.forFloat32Array(bufferSize);
 
     const listener = startRecording(data => {
-      const frequency = detectPitch(data);
+      const result = pitchy.findPitch(data, sampleRate);
 
-      if (frequency) {
+      const frequency = result[0];
+      const clarity = result[1];
+
+      if (
+        frequency &&
+        clarity > 0.93 &&
+        frequency < maxFrequency &&
+        frequency > minFrequency
+      ) {
         const noteValue = noteFinder.getNoteValue(frequency);
 
         setNoteData({

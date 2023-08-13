@@ -2,8 +2,8 @@ declare module 'react-native-recording' {
   interface options {
     bufferSize: number;
     sampleRate: number;
-    bitsPerChannel: 8 | 16;
-    channelsPerFrame: 1 | 2;
+    bitsPerChannel?: 8 | 16;
+    channelsPerFrame?: 1 | 2;
   }
   declare const _default: {
     init: (options: options) => any;

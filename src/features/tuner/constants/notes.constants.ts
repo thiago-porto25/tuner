@@ -14,3 +14,7 @@ export const noteStrings = [
   'A♯',
   'B',
 ];
+export const bufferSize = 2048;
+export const sampleRate = 22050;
+export const maxFrequency = 5000;
+export const minFrequency = 32.7;

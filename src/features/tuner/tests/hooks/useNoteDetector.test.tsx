@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import PitchFinder from 'pitchfinder';
+import { PitchDetector } from 'pitchy';
 import { Provider } from 'react-redux';
 
 import { act, renderHook as initialRenderHook } from '@/__tests__/test-utils';
@@ -13,7 +13,7 @@ import * as recordingUtils from '@/features/tuner/utils/recorder.util';
 import { store } from '@/shared/store';
 
 const startRecordingSpy = jest.spyOn(recordingUtils, 'startRecording');
-const YINSpy = jest.spyOn(PitchFinder, 'YIN');
+const forFloat32ArraySpy = jest.spyOn(PitchDetector, 'forFloat32Array');
 const stopRecordingSpy = jest.spyOn(recordingUtils, 'stopRecording');
 const selectArePermissionsGrantedSpy = jest
   .spyOn(selectors, 'selectArePermissionsGranted')
@@ -40,8 +40,15 @@ describe('useNoteDetector', () => {
   async function mockRecordingListenerEvent() {
     await act(async () => {
       // This was the only way I could find to test the recording change event being called
-      startRecordingSpy.mock.calls[0][0](new Float32Array());
+      startRecordingSpy.mock.calls[0][0](new Float32Array(2048));
     });
+  }
+
+  function createMockFindPitchResult(frequency: number, clarity: number = 1) {
+    return jest.fn((inputLength: number) => ({
+      findPitch: jest.fn(() => [frequency, clarity]),
+      inputLength,
+    })) as unknown as (inputLength: number) => PitchDetector<Float32Array>;
   }
 
   beforeAll(() => {
@@ -60,14 +67,16 @@ describe('useNoteDetector', () => {
   });
 
   it('returns note data when frequency is detected, default middleA', async () => {
-    YINSpy.mockImplementation(() => jest.fn(() => standardMiddleA));
+    forFloat32ArraySpy.mockImplementation(
+      createMockFindPitchResult(standardMiddleA),
+    );
 
     const { result } = renderUseNoteDetectorHook();
 
     await mockRecordingListenerEvent();
 
     expect(result.current.noteData).toEqual({
-      frequency: 440,
+      frequency: standardMiddleA,
       cents: 0,
       noteName: 'A',
       octave: 4,
@@ -77,14 +86,14 @@ describe('useNoteDetector', () => {
   it('returns note data when frequency is detected, custom middleA', async () => {
     const customA = 432;
 
-    YINSpy.mockImplementation(jest.fn(() => jest.fn(() => customA)));
+    forFloat32ArraySpy.mockImplementation(createMockFindPitchResult(customA));
 
     const { result } = renderUseNoteDetectorHook(customA);
 
     await mockRecordingListenerEvent();
 
     expect(result.current.noteData).toEqual({
-      frequency: 432,
+      frequency: customA,
       cents: 0,
       noteName: 'A',
       octave: 4,
@@ -92,7 +101,7 @@ describe('useNoteDetector', () => {
   });
 
   it('does not update noteData when no frequency is detected', async () => {
-    YINSpy.mockImplementation(jest.fn(() => jest.fn(() => null)));
+    forFloat32ArraySpy.mockImplementation(createMockFindPitchResult(0, 0));
 
     const { result } = renderUseNoteDetectorHook();
     const { noteData } = result.current;
