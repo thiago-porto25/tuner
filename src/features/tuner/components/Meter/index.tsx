@@ -9,6 +9,17 @@ function Meter() {
     noteData: { cents, frequency, noteName, octave },
   } = useNoteDetector();
 
+  function getNoteName(note: string) {
+    return (
+      <>
+        {note[0]}{' '}
+        {note[1] && (
+          <S.LargeNoteAccidentalText>{note[1]}</S.LargeNoteAccidentalText>
+        )}
+      </>
+    );
+  }
+
   return (
     <S.Container>
       <S.TopContainerWrapper>
@@ -39,7 +50,9 @@ function Meter() {
         </S.BottomInfoTextContainer>
 
         <S.LargeNoteContainer>
-          <S.LargeNoteText cents={cents}>{noteName}</S.LargeNoteText>
+          <S.LargeNoteText cents={cents}>
+            {getNoteName(noteName)}
+          </S.LargeNoteText>
           <S.OctaveText cents={cents}>{octave}</S.OctaveText>
         </S.LargeNoteContainer>
 

@@ -8,6 +8,7 @@ const family = {
   medium: 'Inter-Medium',
   bold: 'Inter-Bold',
   semibold: 'Inter-SemiBold',
+  accidental: 'NanumGothic-Bold',
 };
 
 export default {

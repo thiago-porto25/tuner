@@ -131,6 +131,15 @@ export const LargeNoteText = styled(Text).attrs({
     font-family: ${theme.family.bold};
     padding-top: ${theme.space.sizeXxxs};
     color: ${getColorByCents(theme, cents)};
+    letter-spacing: -${theme.space.sizeNano};
+  `}
+`;
+
+export const LargeNoteAccidentalText = styled(LargeNoteText)<
+  Partial<LargeNoteTextProps>
+>`
+  ${({ theme }) => css`
+    font-family: ${theme.family.accidental};
   `}
 `;
 
