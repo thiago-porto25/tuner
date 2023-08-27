@@ -60,7 +60,7 @@ describe('TunerPermissionsHandler', () => {
     } as Required<{ [key in Permission]: PermissionStatus }>);
     mockedPermissionsAndroid.check.mockResolvedValueOnce(true);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     await act(async () => {
       global.timeTravel(500);
@@ -84,7 +84,7 @@ describe('TunerPermissionsHandler', () => {
       [audioPermission]: PermissionsAndroid.RESULTS.DENIED,
     } as Required<{ [key in Permission]: PermissionStatus }>);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(testID.TUNER_DENIED_PERMISSION_MODAL),
@@ -94,7 +94,7 @@ describe('TunerPermissionsHandler', () => {
   it('shows permission error modal when an error occurs while requesting permissions', async () => {
     mockedPermissionsAndroid.requestMultiple.mockRejectedValueOnce(null);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(testID.TUNER_ERROR_PERMISSION_MODAL),
@@ -106,7 +106,7 @@ describe('TunerPermissionsHandler', () => {
       [audioPermission]: PermissionsAndroid.RESULTS.DENIED,
     } as Required<{ [key in Permission]: PermissionStatus }>);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(testID.TUNER_DENIED_PERMISSION_MODAL),
@@ -132,7 +132,7 @@ describe('TunerPermissionsHandler', () => {
       [audioPermission]: PermissionsAndroid.RESULTS.DENIED,
     } as Required<{ [key in Permission]: PermissionStatus }>);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(testID.TUNER_DENIED_PERMISSION_MODAL),
@@ -160,7 +160,7 @@ describe('TunerPermissionsHandler', () => {
       [audioPermission]: PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN,
     } as Required<{ [key in Permission]: PermissionStatus }>);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(
@@ -178,7 +178,7 @@ describe('TunerPermissionsHandler', () => {
   it('handles retry of permissions correctly when an error occurs requesting permissions', async () => {
     mockedPermissionsAndroid.requestMultiple.mockRejectedValueOnce(null);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(testID.TUNER_ERROR_PERMISSION_MODAL),
@@ -206,7 +206,7 @@ describe('TunerPermissionsHandler', () => {
       [audioPermission]: PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN,
     } as Required<{ [key in Permission]: PermissionStatus }>);
 
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     expect(
       await screen.findByTestId(
@@ -221,7 +221,7 @@ describe('TunerPermissionsHandler', () => {
   });
 
   it('matches the snapshot', async () => {
-    render(<TunerPermissionsHandler setArePermissionsGranted={jest.fn} />);
+    render(<TunerPermissionsHandler />);
 
     await act(async () => {
       global.timeTravel(500);
